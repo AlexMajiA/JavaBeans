@@ -39,21 +39,27 @@ public class Coche implements Serializable, PropertyChangeListener {
     }
     
     //Este método saltará automáticamente, cuando un evento sea escuchado por el listener de este objeto.
-     @Override
+    @Override
     public void propertyChange(PropertyChangeEvent evt) {
-      
+
         //Solo se activa si el evento es el cambio de matrícula.
-         if (evt.getPropertyName().equals("Matricula vieja / nueva: ")) {
-             System.out.println("Matricula coche vendido: " + evt.getNewValue());
-             System.out.println("Marca: " + getMarca());
-             System.out.println("Modelo: " + getModelo());
-             System.out.println("Precio: " + getPrecio());
-                          
-            //Pongo vendido a true para confirmar que está vendido.
-            this.setVendido(true);
-         }
+        if ("Coche vendido".equals(evt.getPropertyName())) {
+
+            String matriculaVendida = (String) evt.getNewValue();
+
+            if (this.matricula.equals(evt.getNewValue())) {
+                System.out.println("Matricula coche vendido: " + evt.getNewValue());
+                System.out.println("Marca: " + this.marca);
+                System.out.println("Modelo: " + this.modelo);
+                System.out.println("Precio: " + this.precio);
+
+                //Pongo vendido a true para confirmar que está vendido.
+                this.setVendido(true);
+            }
+
+        }
     }
-    
+
     public String getMatricula() {
         return matricula;
     }

@@ -25,7 +25,7 @@ public class Main {
         Ventas venta = new Ventas();
         
         //Asignación de matricula.
-        venta.setMatricula(car1.getMatricula());
+        //venta.setMatricula(car1.getMatricula());
         
         //La venta del vehiculo se apunta a la lista de listener
         venta.addPropertyChangeListener(car1);
@@ -34,6 +34,7 @@ public class Main {
         venta.addPropertyChangeListener(car4);
         
         //Comprobamos si la venta se ha modificado al cambiar la propiedad ligada.
+        System.out.println("Iniciando la venta.");
         venta.setMatricula("123");  
     }
     

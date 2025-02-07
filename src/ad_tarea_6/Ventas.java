@@ -69,10 +69,10 @@ public class Ventas implements Serializable {
         this.matricula = matricula;
 
         //Quermos que se envíe el evento solo cuando el coche está vendido y tiene la misma matrícula.
-        if (car.isVendido()) {
+        if (oldLicensePlate == null || !oldLicensePlate.equals(matricula)){
             System.out.println("Vehículo vendido");
             //Enviamos el evento a quien lo escuche
-            propertySupport.firePropertyChange("Matricula vieja / nueva: ", oldLicensePlate, matricula);
+            propertySupport.firePropertyChange("Coche vendido", oldLicensePlate, matricula);
         }
     }
 
