@@ -15,7 +15,26 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        
+        Coche car1 = new Coche("123", "Seat", "Leon", 20000, false);
+        Coche car2 = new Coche("456", "Ford", "Fiesta", 18000, false);
+        Coche car3 = new Coche("789", "Renault", "Clio", 16000, false);
+        Coche car4 = new Coche("321", "Fiat", "Multipla", 17000, false);
+        
+        
+        Ventas venta = new Ventas();
+        
+        //Asignación de matricula.
+        venta.setMatricula(car1.getMatricula());
+        
+        //La venta del vehiculo se apunta a la lista de listener
+        venta.addPropertyChangeListener(car1);
+        venta.addPropertyChangeListener(car2);
+        venta.addPropertyChangeListener(car3);
+        venta.addPropertyChangeListener(car4);
+        
+        //Comprobamos si la venta se ha modificado al cambiar la propiedad ligada.
+        venta.setMatricula("123");  
     }
     
 }

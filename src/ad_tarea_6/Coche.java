@@ -4,15 +4,15 @@
  */
 package ad_tarea_6;
 
+import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 
 /**
  *PropertyChangeListener y tener un método propertyChange() donde reciba el evento y haga lo que debe hacer en ese caso.
  * @author amjpa
  */
-public class Coche implements Serializable {
+public class Coche implements Serializable, PropertyChangeListener {
 
     /**
      * @param args the command line arguments
@@ -24,13 +24,10 @@ public class Coche implements Serializable {
     private String modelo;
     private float precio;
     private boolean vendido;
-    private PropertyChangeSupport propertySupport;
+    
     
 
     public Coche() {
-        
-        //Inicializamos el objeto que permite lanzar eventos
-        propertySupport = new PropertyChangeSupport(this);
     }
 
     public Coche(String matricula, String marca, String modelo, float precio, boolean vendido) {
@@ -39,17 +36,24 @@ public class Coche implements Serializable {
         this.modelo = modelo;
         this.precio = precio;
         this.vendido = vendido;
-        propertySupport = new PropertyChangeSupport(this);
     }
     
-    //Añadir un objeto a la lista de escuchadores de los eventos de esta clase
-    public void addPropertyChangeListener(PropertyChangeListener listener){
-        propertySupport.addPropertyChangeListener(listener);
+    //Este método saltará automáticamente, cuando un evento sea escuchado por el listener de este objeto.
+     @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+      
+        //Solo se activa si el evento es el cambio de matrícula.
+         if (evt.getPropertyName().equals("Matricula vieja / nueva: ")) {
+             System.out.println("Matricula coche vendido: " + evt.getNewValue());
+             System.out.println("Marca: " + getMarca());
+             System.out.println("Modelo: " + getModelo());
+             System.out.println("Precio: " + getPrecio());
+                          
+            //Pongo vendido a true para confirmar que está vendido.
+            this.setVendido(true);
+         }
     }
     
-    
-    
-
     public String getMatricula() {
         return matricula;
     }
@@ -94,5 +98,7 @@ public class Coche implements Serializable {
     public static void main(String[] args) {
         // TODO code application logic here
     }
+
+   
     
 }

@@ -4,9 +4,13 @@
  */
 package ad_tarea_6;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 
 /**
+ * Venta debe tener un atributo PropertyChangeSupport y usar en el método
+ * setMatricula() propertySupport.firePropertyChange().
  *
  * @author amjpa
  */
@@ -15,11 +19,33 @@ public class Ventas implements Serializable {
     /**
      * @param args the command line arguments
      */
-    
     //Atributos
     private int idVenta;
     private String matricula;
-    
+    private PropertyChangeSupport propertySupport;
+
+    public Ventas() {
+        //Inicializamos el objeto que permite lanzar eventos
+        propertySupport = new PropertyChangeSupport(this);
+    }
+
+    public Ventas(int idVenta, String matricula, PropertyChangeSupport propertySupport) {
+        this.idVenta = idVenta;
+        this.matricula = matricula;
+        this.propertySupport = propertySupport;
+        propertySupport = new PropertyChangeSupport(this);
+    }
+
+    //Añadir un objeto a la lista de escuchadores de los eventos de esta clase
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        propertySupport.addPropertyChangeListener(listener);
+    }
+
+    //Elimina un objeto a la lista de escuchadores de los eventos de esta clase
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        propertySupport.removePropertyChangeListener(listener);
+    }
+
     //Getter y Setter
     public int getIdVenta() {
         return idVenta;
@@ -34,29 +60,25 @@ public class Ventas implements Serializable {
     }
 
     public void setMatricula(String matricula) {
-        
-        if (!matricula.equals(matricula)) {
-            //lanza envento con firepropertychange, y dirá que está vendido.
-            //Envia las dos matriculas, antigua y nueva.
-            this.matricula = matricula;
-        }else {
-            //no se envía este evento.
+        Coche car = new Coche();
+
+        //Almaceno la matricula antigua
+        String oldLicensePlate = this.matricula;
+
+        //Actualizo la matricula nueva
+        this.matricula = matricula;
+
+        //Quermos que se envíe el evento solo cuando el coche está vendido y tiene la misma matrícula.
+        if (car.isVendido()) {
+            System.out.println("Vehículo vendido");
+            //Enviamos el evento a quien lo escuche
+            propertySupport.firePropertyChange("Matricula vieja / nueva: ", oldLicensePlate, matricula);
         }
-        
-        
-        
     }
-    
-    //propertySupport.firePropertyChange().
+
+   
     
     public static void main(String[] args) {
-     
-     
-  
-        //Venta debe tener un atributo PropertyChangeSupport y usar en el método setMatricula() propertySupport.firePropertyChange().
-
-        
-        
         
     }
     
