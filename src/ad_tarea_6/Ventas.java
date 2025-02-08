@@ -60,7 +60,7 @@ public class Ventas implements Serializable {
     }
 
     public void setMatricula(String matricula) {
-        Coche car = new Coche();
+        //Coche car = new Coche();
 
         //Almaceno la matricula antigua
         String oldLicensePlate = this.matricula;

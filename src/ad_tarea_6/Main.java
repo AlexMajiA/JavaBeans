@@ -34,7 +34,7 @@ public class Main {
         venta.addPropertyChangeListener(car4);
         
         //Comprobamos si la venta se ha modificado al cambiar la propiedad ligada.
-        System.out.println("Iniciando la venta.");
+        //System.out.println("Iniciando la venta.");
         venta.setMatricula("123");  
     }
     
