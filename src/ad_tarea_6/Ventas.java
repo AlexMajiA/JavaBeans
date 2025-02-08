@@ -33,7 +33,7 @@ public class Ventas implements Serializable {
         this.idVenta = idVenta;
         this.matricula = matricula;
         this.propertySupport = propertySupport;
-        propertySupport = new PropertyChangeSupport(this);
+        this.propertySupport = propertySupport;
     }
 
     //Añadir un objeto a la lista de escuchadores de los eventos de esta clase
@@ -76,10 +76,4 @@ public class Ventas implements Serializable {
         }
     }
 
-   
-    
-    public static void main(String[] args) {
-        
-    }
-    
 }

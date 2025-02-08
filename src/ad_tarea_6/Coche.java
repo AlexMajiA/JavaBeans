@@ -104,7 +104,4 @@ public class Coche implements Serializable, PropertyChangeListener {
     public static void main(String[] args) {
         // TODO code application logic here
     }
-
-   
-    
 }
